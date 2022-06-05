@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 public class Palabra {
     @Id
+    private int id;
+
     private String palabra;
 
     @Column(name = "cant_doc")
@@ -14,15 +16,22 @@ public class Palabra {
     @Column(name = "max_frec")
     private int maxFrecuenciaPalabra;
 
-   // @Transient
-   // private PalabraController palabController = new PalabraController();
     public Palabra() {
     }
 
-    public Palabra(String palabra, int cantDocumentos, int maxFrecuenciaPalabra) {
+    public Palabra(int id, String palabra, int cantDocumentos, int maxFrecuenciaPalabra) {
+        this.id = id;
         this.palabra = palabra;
         this.cantDocumentos = cantDocumentos;
         this.maxFrecuenciaPalabra = maxFrecuenciaPalabra;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPalabra() {

@@ -7,31 +7,30 @@ import java.io.Serializable;
 @Embeddable
 public class DocumentoXPalabraPk implements Serializable {
     private static final long serialVersionUID = -5299500110975967145L;
-    private String palabra;
-    private String name_doc;
-
-    public DocumentoXPalabraPk(String palabra, String nameDoc) {
-        this.palabra = palabra;
-        this.name_doc = nameDoc;
-    }
+    private int idPal;
+    private int idDoc;
 
     public DocumentoXPalabraPk() {
-
     }
 
-    public String getPalabra() {
-        return palabra;
+    public DocumentoXPalabraPk(int idPal, int idDoc) {
+        this.idPal = idPal;
+        this.idDoc = idDoc;
     }
 
-    public String getName_doc() {
-        return name_doc;
+    public int getIdPal() {
+        return idPal;
     }
 
-    public void setPalabra(String palabra) {
-        this.palabra = palabra;
+    public void setIdPal(int idPal) {
+        this.idPal = idPal;
     }
 
-    public void setName_doc(String name_doc) {
-        this.name_doc = name_doc;
+    public int getIdDoc() {
+        return idDoc;
+    }
+
+    public void setIdDoc(int idDoc) {
+        this.idDoc = idDoc;
     }
 }

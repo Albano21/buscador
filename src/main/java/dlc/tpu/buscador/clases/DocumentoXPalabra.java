@@ -16,22 +16,22 @@ public class DocumentoXPalabra {
 
     public DocumentoXPalabra() {}
 
-    public DocumentoXPalabra(String palabra, String nameDoc, int frecuencia) {
+    public DocumentoXPalabra(int idPalabra, int idDoc, int frecuencia) {
         this.tf = frecuencia;
-        this.clave_primaria = new DocumentoXPalabraPk(palabra, nameDoc);
+        this.clave_primaria = new DocumentoXPalabraPk(idPalabra, idDoc);
     }
 
-    public String getPalabra() {
-        return clave_primaria.getPalabra();
+    public int getIdPalabra() {
+        return clave_primaria.getIdPal();
     }
 
-    public void setPalabra(String palabra) {this.clave_primaria.setPalabra(palabra);}
+    public void setPalabra(int palabra) {this.clave_primaria.setIdPal(palabra);}
 
-    public String getNameDoc() {
-        return clave_primaria.getName_doc();
+    public int getIdDoc() {
+        return clave_primaria.getIdDoc();
     }
 
-    public void setNameDoc(String nameDoc) {this.clave_primaria.setName_doc(nameDoc);}
+    public void setIdDoc(int nameDoc) {this.clave_primaria.setIdDoc(nameDoc);}
 
     public int getTf() {
         return tf;

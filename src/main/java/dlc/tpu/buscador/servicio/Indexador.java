@@ -1,7 +1,9 @@
 package dlc.tpu.buscador.servicio;
 
 import dlc.tpu.buscador.clases.*;
+import dlc.tpu.buscador.repositorio.DocumentoRepository;
 import dlc.tpu.buscador.repositorio.DocumentoXPalabraRepository;
+import dlc.tpu.buscador.repositorio.PalabraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class Indexador {
 
     @Autowired
     private DocumentoXPalabraRepository documentoXPalabraRepo;
+    @Autowired
+    private DocumentoRepository documentoRepository;
+    @Autowired
+    private PalabraRepository palabraRepository;
 
     //Lista de posteos a cargar
     private ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();
@@ -41,17 +47,24 @@ public class Indexador {
         //Vocabulario vocabularioFinal = new Vocabulario();
         HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
 
-        int contArchivos = 0;
+        int contArchivos = 1;
+        int contPalabra = 1;
+
 
         for (File docFile : Objects.requireNonNull(carpeta.listFiles((File pathname) -> pathname.getName().endsWith(".txt")))) {
 
+
+            Documento documento = new Documento(contArchivos, docFile.getName(), docFile.getPath());
+            documentoRepository.save(documento);
+            //documentos.add(documento);
+
             contArchivos++;
-            if (contArchivos >= 3){
+            if (contArchivos > 6){
                 break;
             }
+
             vocabularioAux = new HashMap<>();
-            //Documento documento = new Documento(docFile.getName(), docFile.getPath());
-            //documentos.add(documento);
+
 
             docScan = new Scanner(docFile);
 
@@ -63,6 +76,7 @@ public class Indexador {
 
                 palabra = docScan.next();
                 //int key = palabra.hashCode();
+                //if (palabra == " ") continue;
 
                 palabra = limpiezaTotal(palabra);
 
@@ -82,16 +96,13 @@ public class Indexador {
             // cuando termina de cargar todas las palabras en el vocabularioAux con el while las pasa al vocabulario final
             // y si ya existen le incrementa el contDoc en 1 y verifica si maxFrec es menor a la de este doc y cambia si corresponde
 
+
+
             for(Object po : vocabularioAux.keySet().toArray()){
                 String p =(String) po;
                 int cont = vocabularioAux.remove(p).getContador();
 
-                // Aca se hacen los documentosXPalabra
-                // poner la palabra junto con el doc y con contador que es la frecuencia en ese doc
-                //
-                DocumentoXPalabra documentoXPalabra = new DocumentoXPalabra(palabra, docFile.getName(), cont);
-                //agregar a lista
-                dxpACargar.add(documentoXPalabra);
+
 
                 // Se agrega al vocabulario final
                 if (vocabularioFinal.containsKey(p)){
@@ -100,17 +111,40 @@ public class Indexador {
                     if (palabraExistente.getMaxFrecuenciaPalabra() < cont) palabraExistente.setMaxFrecuenciaPalabra(cont);
                     // incrementa el contador de docs
                     palabraExistente.incrementarCantDocumentos();
+
+                    // Aca se hacen los documentosXPalabra
+                    // poner la palabra junto con el doc y con contador que es la frecuencia en ese doc
+                    //
+                    DocumentoXPalabra documentoXPalabra = new DocumentoXPalabra(palabraExistente.getId(), documento.getId(), cont);
+                    //agregar a lista
+                    dxpACargar.add(documentoXPalabra);
+
                 }
                 else{
-                    Palabra nuevaPalabra = new Palabra(p, 1,cont);
+                    Palabra nuevaPalabra = new Palabra(contPalabra, p, 1,cont);
                     vocabularioFinal.put(p, nuevaPalabra);
+                    contPalabra++;
+
+                    // Aca se hacen los documentosXPalabra
+                    // poner la palabra junto con el doc y con contador que es la frecuencia en ese doc
+                    //
+                    DocumentoXPalabra documentoXPalabra = new DocumentoXPalabra(nuevaPalabra.getId(), documento.getId(), cont);
+                    //agregar a lista
+                    dxpACargar.add(documentoXPalabra);
                 }
+
+
             }
 
             if (dxpACargar.size() >= tamañoCarga){
                 documentoXPalabraRepo.saveAll(dxpACargar);
             }
         }
+
+        Collection<Palabra> palabraList;
+        palabraList = vocabularioFinal.values();
+
+        palabraRepository.saveAll(palabraList);
 
         int contador = 0;
         for (Object po : vocabularioFinal.keySet().toArray()){
@@ -145,6 +179,7 @@ public class Indexador {
         palabra = palabra.replaceAll("[0123456789,;.:!´{}()\"<>*_#$%&@/=?¡-]", "");
         palabra = palabra.replace("[", "");
         palabra = palabra.replace("]", "");
+        palabra = palabra.replace(" ", "");
 
         return palabra;
 

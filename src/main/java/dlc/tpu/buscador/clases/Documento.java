@@ -8,21 +8,29 @@ import javax.persistence.*;
 
 public class Documento {
     @Id
+    private int id;
+
     private String name;
 
     @Basic
     private String path;
 
-  //  @Transient
-   // private DocumentoController docController = new DocumentoController();
-
     public Documento() {
 
     }
 
-    public Documento(String name, String path) {
+    public Documento(int id, String name, String path) {
+        this.id = id;
         this.name = name;
         this.path = path;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPath() {

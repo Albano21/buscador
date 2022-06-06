@@ -8,5 +8,6 @@ import java.util.Collection;
 public interface PalabraRepository extends JpaRepository<Palabra, Integer> {
 
 
+    Integer getIdTopByOrderByIdDesc();
 
 }

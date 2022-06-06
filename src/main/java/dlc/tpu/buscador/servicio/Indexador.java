@@ -32,8 +32,12 @@ public class Indexador {
     //Lista de posteos a cargar
     private ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();
 
-    public void indexar() throws FileNotFoundException {
+    // vocabulario final
+    private HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
 
+
+    public void indexar() throws FileNotFoundException {
+        cargarStopWords();
 
         //Recorre cada documento txt de la carpeta
 
@@ -45,7 +49,7 @@ public class Indexador {
         Scanner docScan;
 
         //Vocabulario vocabularioFinal = new Vocabulario();
-        HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
+        //HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
 
         //Conjunto de documentos a guardar al final del proceso
         HashMap<Integer, Documento> documentosAGuardar = new HashMap<>();
@@ -89,7 +93,6 @@ public class Indexador {
                 palabra = limpiezaTotal(palabra);
 
                 // filtrar las stopwords
-                cargarStopWords();
                 if (stopWords.contains(palabra)) continue;
 
                 //Pregunta si la palabra ya se encuentra y si lo esta aumenta su frecuencia y si no la agrega
@@ -107,7 +110,7 @@ public class Indexador {
                 String p =(String) po;
                 int cont = vocabularioAux.remove(p).getContador();
 
-                Palabra palabraAGuardar = new Palabra();
+                Palabra palabraAGuardar;
 
                 // Se agrega al vocabulario final
                 if (vocabularioFinal.containsKey(p)){
@@ -159,6 +162,87 @@ public class Indexador {
 
     }
 
+    public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
+
+        // consigue el ultimo id y crea el objeto documento
+        int id = documentoRepository.getIdTopByOrderByIdDesc()+1;
+        Documento documento = new Documento(id, docFile.getName(), docFile.getPath());
+
+        // vocabulario auxiliar
+        HashMap<String, Contador> vocabularioAux = new HashMap<>();
+        // lista de palabras nuevas a persistir y de palabras actualizar
+        Collection<Palabra> palabrasAPersistir = new ArrayList<>();
+        // consigue el ultimo id de palabras y le suma 1
+        int contPalabra = palabraRepository.getIdTopByOrderByIdDesc();
+        contPalabra++;
+
+        // crea el scanner para el doc
+        Scanner docScan = new Scanner(docFile);
+
+        //recorre el doc leyendo de a una palabra
+        String palabra;
+        while (docScan.hasNext()){
+            palabra = docScan.next();
+
+            // limpia la palabra de caracteres
+            palabra = limpiezaTotal(palabra);
+
+            // filtrar las stopwords
+            cargarStopWords();
+            if (stopWords.contains(palabra)) continue;
+
+            //Pregunta si la palabra ya se encuentra y si lo esta aumenta su frecuencia y si no la agrega
+            if (vocabularioAux.containsKey(palabra)) {
+                vocabularioAux.get(palabra).incrementar();
+            } else {
+                vocabularioAux.put(palabra, new Contador());
+            }
+        }
+
+        // recorre el vocabulario auxiliar y persiste las palabras nuevas,
+        //a las viejas verifica que el maxtf no sea mayor y actualiza
+        for(Object po : vocabularioAux.keySet().toArray()){
+            String p =(String) po;
+            int cont = vocabularioAux.remove(p).getContador();
+
+            Palabra palabraAGuardar;
+
+            // Se agrega al vocabulario final
+            if (vocabularioFinal.containsKey(p)){
+                palabraAGuardar = vocabularioFinal.get(p);
+                // si la contador en este doc es mayor cambia la frecMax
+                if (palabraAGuardar.getMaxFrecuenciaPalabra() < cont) palabraAGuardar.setMaxFrecuenciaPalabra(cont);
+                // incrementa el contador de docs
+                palabraAGuardar.incrementarCantDocumentos();
+                //guarda la palabra en la lista de palabras a persistir
+                palabrasAPersistir.add(palabraAGuardar);
+            }
+            else{
+                palabraAGuardar = new Palabra(contPalabra, p, 1,cont);
+                vocabularioFinal.put(p, palabraAGuardar);
+                palabrasAPersistir.add(palabraAGuardar);
+                contPalabra++;
+            }
+
+            // Aca se hacen los documentosXPalabra
+            // poner la palabra junto con el doc y con contador que es la frecuencia en ese doc
+            DocumentoXPalabra documentoXPalabra = new DocumentoXPalabra(palabraAGuardar.getId(), documento.getId(), cont);
+            //agregar a lista
+            dxpACargar.add(documentoXPalabra);
+        }
+
+
+        // carga todos los dxp
+        documentoXPalabraRepo.saveAll(dxpACargar);
+        dxpACargar.clear();
+
+        // persiste el documento
+        documentoRepository.save(documento);
+
+        // persiste las palabras nuevas y actualiza las que ya estan
+        palabraRepository.saveAll(palabrasAPersistir);
+
+    }
 
     private void cargarStopWords() throws FileNotFoundException {
         File fileEnglish = new File("StopsWords.txt");

@@ -29,11 +29,9 @@ public class Indexador {
     @Autowired
     private PalabraRepository palabraRepository;
 
-    //Lista de posteos a cargar
-    private ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();
 
-    // vocabulario final
-    private HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
+
+
 
 
     public void indexar() throws FileNotFoundException {
@@ -48,11 +46,14 @@ public class Indexador {
         HashMap<String, Contador> vocabularioAux;
         Scanner docScan;
 
-        //Vocabulario vocabularioFinal = new Vocabulario();
-        //HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
+        // Vocabulario final
+        HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
 
         //Conjunto de documentos a guardar al final del proceso
         HashMap<Integer, Documento> documentosAGuardar = new HashMap<>();
+
+        //Conjunto de dxp a guardar
+        ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();
 
         int contArchivos = 1;
         int contPalabra = 1;
@@ -162,7 +163,8 @@ public class Indexador {
 
     }
 
-    public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
+    //HAY QUE TRAER LA HASHYABLE DE PALABRAS DESDE LA BASE DE DATOS y hacer tabla dxps
+    /*public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
 
         // consigue el ultimo id y crea el objeto documento
         int id = documentoRepository.getIdTopByOrderByIdDesc()+1;
@@ -244,6 +246,7 @@ public class Indexador {
 
     }
 
+    */
     private void cargarStopWords() throws FileNotFoundException {
         File fileEnglish = new File("StopsWords.txt");
         Scanner scStopWords = new Scanner(fileEnglish);
@@ -272,5 +275,7 @@ public class Indexador {
         return palabra;
 
     }
+
+
 
 }

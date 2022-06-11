@@ -72,7 +72,7 @@ public class Documento implements Comparable<Documento>{
             respuesta = 1;
         }
         else{
-            respuesta = 1;
+            respuesta = -1;
         }
         return respuesta;
     }

@@ -96,6 +96,9 @@ public class Buscador {
                     // agrego el documento
                     listaDocumentosConsulta.add(docAAgregar);
                 }
+                else{
+                    //ver que pasa si el documento ya esta en la lista de documentos a mostrar
+                }
             }
         }
         // ordeno la lista de documentos, se supone que se ordena por ir

@@ -163,7 +163,7 @@ public class Indexador {
 
     }
 
-    //HAY QUE TRAER LA HASHYABLE DE PALABRAS DESDE LA BASE DE DATOS y hacer tabla dxps
+    //HAY QUE TRAER LA HASHTABLE DE PALABRAS DESDE LA BASE DE DATOS y hacer tabla dxps
     /*public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
 
         // consigue el ultimo id y crea el objeto documento
@@ -257,8 +257,6 @@ public class Indexador {
 
             stopWords.add(scStopWords.next());
         }
-
-        //return stopWords;
 
     }
 

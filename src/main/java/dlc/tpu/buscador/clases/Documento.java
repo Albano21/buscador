@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "documento")
 
-public class Documento {
+public class Documento implements Comparable<Documento>{
     @Id
     private int id;
 
@@ -14,6 +14,9 @@ public class Documento {
 
     @Basic
     private String path;
+
+    @Transient
+    private double ir;
 
     public Documento() {
 
@@ -49,5 +52,29 @@ public class Documento {
         this.name = name;
     }
 
+    public double getIr() {
+        return ir;
+    }
+
+    public void setIr(float ir) {
+        this.ir = ir;
+    }
+
+    public void sumarIr(double ir){
+        this.ir += ir;
+    }
+
+    @Override
+    public int compareTo(Documento o) {
+        // ver si esto esta bien
+        int respuesta = 0;
+        if (this.ir - o.ir > 0){
+            respuesta = 1;
+        }
+        else{
+            respuesta = 1;
+        }
+        return respuesta;
+    }
 }
 

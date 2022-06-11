@@ -3,7 +3,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "documento_x_palabra")
-public class DocumentoXPalabra {
+public class DocumentoXPalabra implements Comparable<DocumentoXPalabra>{
 
     @EmbeddedId
     private DocumentoXPalabraPk clave_primaria;
@@ -39,6 +39,11 @@ public class DocumentoXPalabra {
 
     public void setTf(int tf) {
         this.tf = tf;
+    }
+
+    @Override
+    public int compareTo(DocumentoXPalabra o) {
+        return this.tf - o.tf;
     }
 }
 

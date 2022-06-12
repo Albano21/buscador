@@ -159,6 +159,13 @@ public class Buscador {
         return listasDePosteoConsulta;
     }
 
+    public Collection<Documento> buscarTodosLosDocumentos(){
+        if (documentos.isEmpty()){
+            documentos = cargarDocumentos();
+        }
+        return documentos.values();
+    }
+
     private void formaViejaDeCargarPosteos(String consulta){
         // hacer los posteos directamente desde la string consulta, saca la tablaConsulta
 

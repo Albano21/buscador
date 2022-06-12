@@ -23,6 +23,11 @@ public class buscadorController {
         return buscador.buscar(consulta);
     }
 
+    @GetMapping("/todos")
+    public Collection<Documento> mostrarTodos(){
+        return buscador.buscarTodosLosDocumentos();
+    }
+
 
 
 

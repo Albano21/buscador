@@ -10,7 +10,6 @@ import dlc.tpu.buscador.repositorio.PalabraRepository;
 import dlc.tpu.buscador.soporte.Heap;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.print.Doc;
 import java.util.*;
 
 public class Buscador {
@@ -22,7 +21,7 @@ public class Buscador {
     @Autowired
     private DocumentoXPalabraRepository documentoXPalabraRepo;
 
-    public Collection<Documento> Buscador(String consulta) {
+    public LinkedList<Documento> buscar(String consulta) {
 
         //-------------------------------ENTRADAS--------------------------------
         //El conjunto D con N documentos di.

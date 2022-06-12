@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:"Poppins", sans-serif;
+}
+
+#logo-main {
+    display: block;
+    margin: 10px auto;
+    width: 15%;
+}
+
+.container {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+
+}
+
+h1,h2,h4 {
+    margin: 15px auto;
+    text-align: center;
+}
+
+
+/*FOOTER*/
+
+.footer-basic-centered{
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font: normal 18px sans-serif;
+
+    padding: 45px;
+    margin-top: 80px;
+}
+
+.footer-basic-centered .footer-company-motto{
+    color:  #8d9093;
+    font-size: 24px;
+    margin: 0;
+}
+
+.footer-basic-centered .footer-company-name{
+    color:  #8f9296;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-basic-centered .footer-links{
+    list-style: none;
+    color:  #ffffff;
+    padding: 35px 0 23px;
+    margin: 0;
+}
+
+.footer-basic-centered .footer-links a{
+    display:inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+    .footer-basic-centered{
+        padding: 35px;
+    }
+
+    .footer-basic-centered .footer-company-motto{
+        font-size: 18px;
+    }
+
+    .footer-basic-centered .footer-company-name{
+        font-size: 12px;
+    }
+
+    .footer-basic-centered .footer-links{
+        font-size: 14px;
+        padding: 25px 0 20px;
+    }
+
+    .footer-basic-centered .footer-links a{
+        line-height: 1.8;
+    }
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+}
+
+@media (max-height:800px){
+    footer { position: static; }
+    header { padding-top:10px; }
+}
+
+/*BUSQUEDA*/
+
+input {
+    font: inherit;
+    margin: 0;
+}
+
+.grid {
+    inline-size: 90%;
+    max-inline-size: 24em;
+    margin: 4rem auto;
+    width: 100%;
+    align-items: center;
+
+}
+
+.search {
+
+}
+
+.search__field {
+    position: relative;
+}
+
+.search__label {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAxElEQVR4AXXPIUuDcRDA4Zv4AUSwTLEKVoNlySyCYLO98CCsahGrX0AW/QhmBRHEJghLS4JFBBXDgrJi2In78w8v4v3S8XDh4nd0DTxLEzd2RC2EnrH07trQVDrXqbhs7FvfnBDWDKWTigOpL2oWvZpYKPjio1zVHEt7BdOtaLUtHRX8MmqjRjooeCVttPBOWi+4JT1aLaDjVLpU/5ytn840Dj1IaWSpYmi8yVlTF54qh9K8nn27usJK5fC3yvfhPx7a/AE9dYwDEfKrlAAAAABJRU5ErkJggg==);
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    color: #b2b2b2;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    transition: left 0.4s, transform 0.4s;
+    padding-left: 1.25em;
+}
+
+.search__input {
+    border: 1px solid #dfdfdf;
+    border-radius: 0.25em;
+    box-shadow: 0 1px 0 #bfbebf;
+    display: block;
+    padding: 0.5em 1.75em;
+    width: 100%;
+}
+
+.search__input:focus + .search__label,
+.search__input:valid + .search__label {
+    left: 0.5em;
+    transform: translate(0, -50%);
+}
+
+.search__input:valid + .search__label {
+    text-indent: -9999px;
+}
+
+/*TABLE*/
+
+table{
+    width:  1000px;
+    margin: 30px auto;
+}
+
+table th{
+    padding: 10px 0;
+    background-color: #f4f4f4;
+    /* background-color: #fff; */
+    border:  thin solid #d4d4d4;
+}
+
+table td{
+    padding: 10px;
+    border:  thin solid #d4d4d4;
+    width: 18%;
+    text-align: center;
+    background-color: #fff;
+}
+
+table img{
+    width:  70%;
+}
+
+table td.total-price{
+    font-weight: bold;
+    font-size: 22px;
+}
+table a{
+    text-decoration: none;
+    color: darkred;
+    background-color: #ffecef;
+    padding: 10px 15px;
+}
+table a:active{
+    background-color: #ccf4d6;
+    color:  green;
+}
+
+table select{
+    padding: 10px;
+    width:  200px;
+    font-size: 16px;
+    border: thin solid #d4d4d4;
+    background-color: transparent;
+}
+table select:focus{
+    outline: none;
+}
+
+table img{
+    width:  60%;
+}
+

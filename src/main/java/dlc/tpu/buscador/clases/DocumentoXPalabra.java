@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class DocumentoXPalabra implements Comparable<DocumentoXPalabra>{
 
     @EmbeddedId
-    private DocumentoXPalabraPk clave_primaria;
+    private DocumentoXPalabraPk clavePrimaria;
 
     @Basic
     private int tf;
@@ -18,20 +18,20 @@ public class DocumentoXPalabra implements Comparable<DocumentoXPalabra>{
 
     public DocumentoXPalabra(int idPalabra, int idDoc, int frecuencia) {
         this.tf = frecuencia;
-        this.clave_primaria = new DocumentoXPalabraPk(idPalabra, idDoc);
+        this.clavePrimaria = new DocumentoXPalabraPk(idPalabra, idDoc);
     }
 
     public int getIdPalabra() {
-        return clave_primaria.getIdPal();
+        return clavePrimaria.getIdPal();
     }
 
-    public void setPalabra(int palabra) {this.clave_primaria.setIdPal(palabra);}
+    public void setPalabra(int palabra) {this.clavePrimaria.setIdPal(palabra);}
 
     public int getIdDoc() {
-        return clave_primaria.getIdDoc();
+        return clavePrimaria.getIdDoc();
     }
 
-    public void setIdDoc(int nameDoc) {this.clave_primaria.setIdDoc(nameDoc);}
+    public void setIdDoc(int nameDoc) {this.clavePrimaria.setIdDoc(nameDoc);}
 
     public int getTf() {
         return tf;

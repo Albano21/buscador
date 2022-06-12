@@ -6,6 +6,7 @@ import dlc.tpu.buscador.repositorio.DocumentoXPalabraRepository;
 import dlc.tpu.buscador.repositorio.PalabraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 @Service
+@ApplicationScope
 public class Indexador {
 
     public Indexador() {

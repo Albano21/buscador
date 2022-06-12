@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface DocumentoXPalabraRepository extends JpaRepository<DocumentoXPalabra, DocumentoXPalabraPk> {
 
-    List<DocumentoXPalabra> findAllByIdPalabra(int idPal);
+
+    List<DocumentoXPalabra> findAllByClavePrimaria(DocumentoXPalabraPk clave);
 }

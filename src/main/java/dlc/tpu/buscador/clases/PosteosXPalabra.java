@@ -19,8 +19,8 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
         return palabra;
     }
 
-    public DocumentoXPalabra getUnPosteo(){
-        return posteos.get();
+    public DocumentoXPalabra sacarPrimerPosteo(){
+        return posteos.remove();
     }
 
     public Heap<DocumentoXPalabra> getPosteos() {
@@ -29,6 +29,15 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
 
     public int getTamañoLista(){
         return posteos.size();
+    }
+
+    public boolean esListaVacia(){
+        if (posteos.size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //compara segun el tamaño de la lista

@@ -56,7 +56,7 @@ public class Documento implements Comparable<Documento>{
         return ir;
     }
 
-    public void setIr(float ir) {
+    public void setIr(double ir) {
         this.ir = ir;
     }
 

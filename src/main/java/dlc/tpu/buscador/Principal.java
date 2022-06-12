@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
-
+/*
 @Component
 @SpringBootApplication
 public class Principal implements CommandLineRunner {
@@ -28,3 +28,5 @@ public class Principal implements CommandLineRunner {
 
     }
 }
+
+ */

@@ -8,7 +8,7 @@
 
 #logo-main {
     display: block;
-    margin: 10px auto;
+    margin: 20px auto;
     width: 15%;
 }
 
@@ -25,7 +25,6 @@ h1,h2,h4 {
     margin: 15px auto;
     text-align: center;
 }
-
 
 /*FOOTER*/
 
@@ -66,8 +65,6 @@ h1,h2,h4 {
     color: inherit;
 }
 
-/* If you don't want the footer to be responsive, remove these media queries */
-
 @media (max-width: 600px) {
 
     .footer-basic-centered{
@@ -92,10 +89,6 @@ h1,h2,h4 {
     }
 }
 
-footer{
-    position: fixed;
-    bottom: 0;
-}
 
 @media (max-height:800px){
     footer { position: static; }
@@ -214,3 +207,123 @@ table img{
     width:  60%;
 }
 
+/*ICONOS Y GENERAL*/
+
+*:focus,
+*:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    place-items: center;
+    background: linear-gradient(315deg, #ffffff, #d7e1ec);
+}
+
+.wrapper {
+    display: inline-flex;
+    list-style: none;
+}
+
+.wrapper .icon {
+    position: relative;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 60px;
+    width: 80px;
+    height: 80px;
+    font-size: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+    background: #7B68EE;
+    color: #ffffff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+    background: #FF4500;
+    color: #ffffff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+    background: #FF8C00;
+    color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+    background: #333333;
+    color: #ffffff;
+}
+
+.wrapper .youtube:hover,
+.wrapper .youtube:hover .tooltip,
+.wrapper .youtube:hover .tooltip::before {
+    background: #1E90FF;
+    color: #ffffff;
+}
+
+.wrapper .js:hover,
+.wrapper .js:hover .tooltip,
+.wrapper .js:hover .tooltip::before {
+    background: #FFFF00;
+    color: #000000;
+}

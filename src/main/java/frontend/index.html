@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="./soporte/style.css">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <!-- Iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
         <title>TPU DLC 2022</title>
     </head>
     <body>
@@ -22,9 +23,9 @@
                 <h4>Diseño de Lenguajes de Consulta</h4>
 
                 <div class="grid">
-                    <form action="http://localhost:8080/buscador/todos" method="GET" class="search">
+                    <form action="http://localhost:8080/buscador/query" method="get" class="search">
                         <div class="search__field">
-                            <input type="text" class="search__input" id="query" name="query" required>
+                            <input type="search" class="search__input" id="query" name="query" required autocomplete="off">
                             <label for="query" class="search__label">Buscar</label>
                         </div>
                     </form>
@@ -42,12 +43,35 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!--Cargar docs: <a href= http://localhost:8080/TPU3/resources/Buscador/cargar_documentos>cargar</a><br>
-                Cargar un doc: NotImplemented u.u  <br>
-                Buscar: http://localhost:8080/TPU3/resources/Buscador/busqueda/ [Consulta a buscar]-->
-
             </section>
+
+            <h4>Tecnologias Usadas</h4>
+            <ul class="wrapper">
+                <li class="icon instagram">
+                    <span class="tooltip">Java</span>
+                    <span><i class="fab fa-java"></i></span>
+                </li>
+                <li class="icon facebook">
+                    <span class="tooltip">Bootstrap</span>
+                    <span><i class="fab fa-bootstrap"></i></span>
+                </li>
+                <li class="icon twitter">
+                    <span class="tooltip">HTML</span>
+                    <span><i class="fa-brands fa-html5"></i></span>
+                </li>
+                <li class="icon youtube">
+                    <span class="tooltip">CSS</span>
+                    <span><i class="fa-brands fa-css3-alt"></i></span>
+                </li>
+                <li class="icon js">
+                    <span class="tooltip">JavaScript</span>
+                    <span><i class="fa-brands fa-js"></i></span>
+                </li>
+                <li class="icon github">
+                    <span class="tooltip">MySQL</span>
+                    <span><i class="fa-solid fa-database"></i></span>
+                </li>
+            </ul>
         </main>
 
         <footer class="footer-basic-centered">

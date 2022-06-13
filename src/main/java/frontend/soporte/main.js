@@ -1,5 +1,5 @@
 async function obtenerDatos() {
-    const response = await fetch("URL");
+    const response = await fetch("URL_DEL_JSON");
     const json = await response.json();
 
     console.log(json);
@@ -8,7 +8,7 @@ async function obtenerDatos() {
 obtenerDatos()
 
 
-fetch("products.json")
+fetch("nombreDelJson.json")
     .then(function(response){
         return response.json();
     })
@@ -18,11 +18,8 @@ fetch("products.json")
         for(let product of products){
             out += `
          <tr>
-            <td> <img src='${product.image}'> </td>
+            <td>${product.id}</td>
             <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.inventory}</td>
-            <td>${product.productCode}</td>
          </tr>
       `;
         }

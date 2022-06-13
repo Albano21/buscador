@@ -72,15 +72,32 @@ public class Documento implements Comparable<Documento>{
 
     @Override
     public int compareTo(Documento o) {
-        // ver si esto esta bien
+
+        if ((this.ir - o.ir > 0)) {
+            return 1;
+        } else if ((this.ir - o.ir < 0)) {
+            return -1;
+        } else {
+            return this.id - o.id;
+        }
+
+
+/*
         int respuesta = 0;
+        // ver si esto esta bien
         if (this.ir - o.ir > 0){
-            respuesta = 1;
+            respuesta =  1;
         }
         else{
             respuesta = -1;
         }
         return respuesta;
+
+ */
+
+
+
+
     }
 
     //Metodo que carga la descripcion del doc

@@ -18,18 +18,21 @@ public class buscadorController {
     @Autowired
     private Buscador buscador;
 
-    /*
-    @GetMapping("/{}")
-    public Collection<Documento> buscar(@RequestParam String consulta){
+
+    @GetMapping("/")
+    public Collection<Documento> buscar(@RequestParam(required = false) String consulta){
         return buscador.buscar(consulta);
     }
 
-     */
 
+
+/*
     @GetMapping("/{consulta}")
     public Collection<Documento> buscar(@PathVariable String consulta){
         return buscador.buscar(consulta);
     }
+ */
+
 
     @GetMapping("/todos")
     public Collection<Documento> mostrarTodos(){

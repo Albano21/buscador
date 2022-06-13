@@ -43,7 +43,16 @@ public class DocumentoXPalabra implements Comparable<DocumentoXPalabra>{
 
     @Override
     public int compareTo(DocumentoXPalabra o) {
-        return this.tf - o.tf;
+
+        if(this.tf - o.tf > 0){
+            return 1;
+        }
+        else if(this.tf - o.tf < 0){
+            return -1;
+        }
+        else{
+            return this.getIdDoc() - o.getIdDoc();
+        }
     }
 }
 

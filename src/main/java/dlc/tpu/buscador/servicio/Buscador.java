@@ -26,7 +26,7 @@ public class Buscador {
 
     private HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
 
-    public LinkedList<Documento> buscar(String consulta) {
+    public ArrayList<Documento> buscar(String consulta) {
 
         // hacer que el vocabulario final y el conjunto de documentos se carguen solo la primera vez que se activa el
         // buscador, hay que ponerlos como atributos de la clase y usarlos para busquedas dentro de la misma sesion
@@ -56,7 +56,7 @@ public class Buscador {
         //-------------------------------PROCESO--------------------------------
         // creo la lista de documentos de la consulta, de tamaño R(ranking)
         // tienen que estar ordenados por ranking. cambiar arraylist por lo que vaya
-        LinkedList<Documento> listaDocumentosConsulta = new LinkedList<>();
+        List<Documento> listaDocumentosConsulta = new ArrayList<>();
 
         // mientras haya palabras
         for(PosteosXPalabra posteoDePalabra1 : listasDePosteoConsulta.descendingSet()){
@@ -99,15 +99,16 @@ public class Buscador {
             }
         }
         // ordeno la lista de documentos, se supone que se ordena por ir
-        Collections.sort(listaDocumentosConsulta);
+        Collections.sort(listaDocumentosConsulta, Collections.reverseOrder());
+
 
         // saco los primeros R documentos en una lista final
-        LinkedList<Documento> listaDocumentosConsultaFinal = new LinkedList<>();
+        ArrayList<Documento> listaDocumentosConsultaFinal = new ArrayList<>();
 
         int contR = 0;
         for (int i = 0; i < listaDocumentosConsulta.size(); i++) {
             if (contR <= R) {
-                Documento docR = listaDocumentosConsulta.removeLast();
+                Documento docR = listaDocumentosConsulta.get(i);
                 listaDocumentosConsultaFinal.add(docR);
             }
             else{

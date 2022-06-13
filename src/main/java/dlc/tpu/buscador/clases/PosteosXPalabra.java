@@ -46,7 +46,16 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
     //compara segun el tamaño de la lista
     @Override
     public int compareTo(PosteosXPalabra o) {
-        return  o.getTamañoLista() - this.getTamañoLista();
+        if (this.palabra.equals(o.palabra)) {
+            return 0;
+        } else if (o.getTamañoLista() - this.getTamañoLista() > 0) {
+            return 1;
+        }else if (o.getTamañoLista() - this.getTamañoLista() < 0){
+            return -1;
+        }
+        else{
+            return -1;
+        }
     }
 
     public void agregarPosteo(DocumentoXPalabra documentoXPalabra){

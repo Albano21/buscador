@@ -1,5 +1,5 @@
 async function obtenerDatos() {
-    const response = await fetch("http://localhost:8080/buscador/todos");
+    const response = await fetch("http://localhost:8080/buscador/");
     const json = await response.json();
 
     //console.log(json);
@@ -8,7 +8,7 @@ async function obtenerDatos() {
 obtenerDatos()
 
 
-fetch("http://localhost:8080/buscador/todos")
+fetch("http://localhost:8080/buscador/")
     .then(function(response){
         return response.json();
     })

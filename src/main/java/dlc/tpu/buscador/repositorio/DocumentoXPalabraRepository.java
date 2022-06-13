@@ -11,4 +11,6 @@ public interface DocumentoXPalabraRepository extends JpaRepository<DocumentoXPal
 
 
     List<DocumentoXPalabra> findAllByClavePrimaria(DocumentoXPalabraPk clave);
+
+    List<DocumentoXPalabra> findAllByClavePrimaria_IdPal(int idPal);
 }

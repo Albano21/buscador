@@ -82,7 +82,7 @@ public class Buscador {
                     //aca se calcula el ir
                     int tf = dxp.getTf();
                     int nr = palabra1.getCantDocumentos();
-                    double idf = Math.log(N / nr);
+                    double idf = Math.log(((double) N) / ((double)nr));
                     double ir = tf * idf;
 
                     if (!listaDocumentosConsulta.contains(docAAgregar)) {
@@ -150,9 +150,9 @@ public class Buscador {
                 PosteosXPalabra posteosXPalabra = new PosteosXPalabra(palabraObjeto);
 
                 //por cada dxp de cada palabra la agrego a su lista
-                DocumentoXPalabraPk clave = new DocumentoXPalabraPk();
-                clave.setIdPal(palabraObjeto.getId());
-                for(DocumentoXPalabra dxp : documentoXPalabraRepo.findAllByClavePrimaria(clave)){
+                //DocumentoXPalabraPk clave = new DocumentoXPalabraPk();
+                //clave.setIdPal(palabraObjeto.getId());
+                for(DocumentoXPalabra dxp : documentoXPalabraRepo.findAllByClavePrimaria_IdPal(palabraObjeto.getId())){
                     posteosXPalabra.agregarPosteo(dxp);
                 }
 

@@ -1,6 +1,9 @@
 package dlc.tpu.buscador.clases;
 
+import com.sun.source.tree.Tree;
 import dlc.tpu.buscador.soporte.Heap;
+
+import java.util.TreeSet;
 
 public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
 
@@ -8,11 +11,11 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
 
     //necesito que esta coleccion este ordenada por el tf
     // es un heap descendente de mayor a menor posteo
-    private Heap<DocumentoXPalabra> posteos;
+    private TreeSet<DocumentoXPalabra> posteos;
 
     public PosteosXPalabra(Palabra palabra) {
         this.palabra = palabra;
-        this.posteos = new Heap<>(false);
+        this.posteos = new TreeSet<DocumentoXPalabra>();
     }
 
     public Palabra getPalabra() {
@@ -20,10 +23,10 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
     }
 
     public DocumentoXPalabra sacarPrimerPosteo(){
-        return posteos.remove();
+        return posteos.first();
     }
 
-    public Heap<DocumentoXPalabra> getPosteos() {
+    public TreeSet<DocumentoXPalabra> getPosteos() {
         return posteos;
     }
 
@@ -43,7 +46,7 @@ public class PosteosXPalabra implements Comparable<PosteosXPalabra> {
     //compara segun el tamaño de la lista
     @Override
     public int compareTo(PosteosXPalabra o) {
-        return this.getTamañoLista() - o.getTamañoLista();
+        return  o.getTamañoLista() - this.getTamañoLista();
     }
 
     public void agregarPosteo(DocumentoXPalabra documentoXPalabra){

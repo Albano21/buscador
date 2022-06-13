@@ -2,6 +2,9 @@ package dlc.tpu.buscador.clases;
 
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 @Entity
 @Table(name = "documento")
@@ -17,6 +20,9 @@ public class Documento implements Comparable<Documento>{
 
     @Transient
     private double ir;
+
+    @Transient
+    private String descripcion;
 
     public Documento() {
 
@@ -75,6 +81,18 @@ public class Documento implements Comparable<Documento>{
             respuesta = -1;
         }
         return respuesta;
+    }
+
+    //Metodo que carga la descripcion del doc
+    public void cargarDescripcion() throws FileNotFoundException {
+        Scanner scDoc = new Scanner(new File(path));
+        while(scDoc.hasNextLine()){
+            String linea = scDoc.nextLine();
+            if (linea.isEmpty()){
+                break;
+            }
+            descripcion += linea + "\n";
+        }
     }
 }
 

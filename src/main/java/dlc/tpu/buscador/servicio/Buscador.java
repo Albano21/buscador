@@ -31,7 +31,6 @@ public class Buscador {
         // hacer que el vocabulario final y el conjunto de documentos se carguen solo la primera vez que se activa el
         // buscador, hay que ponerlos como atributos de la clase y usarlos para busquedas dentro de la misma sesion
 
-
         //-------------------------------ENTRADAS--------------------------------
         //El conjunto D con N documentos di.
         if (documentos.isEmpty()){
@@ -51,7 +50,7 @@ public class Buscador {
         int R = 40;
 
         //Llama al metodo para carga los posteos
-        Heap<PosteosXPalabra> listasDePosteoConsulta = cargarPosteos(consulta);
+        TreeSet<PosteosXPalabra> listasDePosteoConsulta = cargarPosteos(consulta);
 
 
         //-------------------------------PROCESO--------------------------------
@@ -60,19 +59,21 @@ public class Buscador {
         LinkedList<Documento> listaDocumentosConsulta = new LinkedList<>();
 
         // mientras haya palabras
-        while(!listasDePosteoConsulta.isEmpty()){
+        for(PosteosXPalabra posteoDePalabra1 : listasDePosteoConsulta.descendingSet()){
 
             //saca del heap el posteo de la palabra que tiene menor cantidad de posteos
-            PosteosXPalabra posteoDePalabra1 = listasDePosteoConsulta.get();
+            //PosteosXPalabra posteoDePalabra1 = listasDePosteoConsulta.last();
+            //listasDePosteoConsulta.remove(posteoDePalabra1);
 
             // saca la palabra
             Palabra palabra1 = posteoDePalabra1.getPalabra();
 
             // En la lista Pk de tk, repetir R veces
-            for (int i = 0; i < R; i++) {
-                if (!posteoDePalabra1.esListaVacia()) {
+            //for (int i = 0; i < R; i++)
+            for (DocumentoXPalabra dxp : posteoDePalabra1.getPosteos().descendingSet()){
+                //if (!posteoDePalabra1.esListaVacia()) {
                     // saca el primer posteo de la lista, es decir el que tiene mayor tf
-                    DocumentoXPalabra dxp = posteoDePalabra1.sacarPrimerPosteo();
+                    //DocumentoXPalabra dxp = posteoDePalabra1.sacarPrimerPosteo();
                     // saca el id del documento del posteo
                     int idDoc = dxp.getIdDoc();
 
@@ -94,7 +95,7 @@ public class Buscador {
                         //creo que hay que subirle el tir, para que ascienda en ranking
                         docAAgregar.sumarIr(ir);
                     }
-                }
+
             }
         }
         // ordeno la lista de documentos, se supone que se ordena por ir
@@ -102,9 +103,17 @@ public class Buscador {
 
         // saco los primeros R documentos en una lista final
         LinkedList<Documento> listaDocumentosConsultaFinal = new LinkedList<>();
-        for (int i = 0; i < R; i++) {
-            Documento docR = listaDocumentosConsulta.removeLast();
-            listaDocumentosConsultaFinal.add(docR);
+
+        int contR = 0;
+        for (int i = 0; i < listaDocumentosConsulta.size(); i++) {
+            if (contR <= R) {
+                Documento docR = listaDocumentosConsulta.removeLast();
+                listaDocumentosConsultaFinal.add(docR);
+            }
+            else{
+                break;
+            }
+            contR++;
         }
 
         //-------------------------------SALIDA--------------------------------
@@ -127,10 +136,10 @@ public class Buscador {
         return vocabularioFinal;
     }
 
-    private Heap<PosteosXPalabra> cargarPosteos(String consulta){
+    private TreeSet<PosteosXPalabra> cargarPosteos(String consulta){
         // Posteo: La lista de posteo Pk de cada término tk
         // ordenado por la cantidad de posteos que tenga la lista(de menor a mayor)
-        Heap<PosteosXPalabra> listasDePosteoConsulta = new Heap<>(true);
+        TreeSet<PosteosXPalabra> listasDePosteoConsulta = new TreeSet<>();
 
         // por cada palabra de la String consulta hago un objeto palabra y una lista de posteo para esa palabra
         for(String palabraCadena : consulta.split(" ")){
@@ -160,6 +169,11 @@ public class Buscador {
     }
 
     public Collection<Documento> buscarTodosLosDocumentos(){
+
+        if (vocabularioFinal.isEmpty()){
+            vocabularioFinal = cargarVocabularioFinal();
+        }
+
         if (documentos.isEmpty()){
             documentos = cargarDocumentos();
         }

@@ -1,25 +1,25 @@
 async function obtenerDatos() {
-    const response = await fetch("URL_DEL_JSON");
+    const response = await fetch("http://localhost:8080/buscador/todos");
     const json = await response.json();
 
-    console.log(json);
+    //console.log(json);
 }
 
 obtenerDatos()
 
 
-fetch("nombreDelJson.json")
+fetch("http://localhost:8080/buscador/todos")
     .then(function(response){
         return response.json();
     })
-    .then(function(products){
+    .then(function(todos){
         let placeholder = document.querySelector("#data-output");
         let out = "";
-        for(let product of products){
+        for(let documento of todos){
             out += `
          <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
+            <td>${documento.id}</td>
+            <td>${documento.name}</td>
          </tr>
       `;
         }

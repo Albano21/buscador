@@ -22,7 +22,7 @@ public class Indexador {
 
     private HashSet<String> stopWords = new HashSet<>();
 
-    private int tamañoCarga = 20000;
+    private int tamañoCarga = 100000;
 
     @Autowired
     private DocumentoXPalabraRepository documentoXPalabraRepo;
@@ -72,9 +72,9 @@ public class Indexador {
             // incrementa el contador de archivos
             contArchivos++;
 
-            // corte para hacer pocos documentos
+            //corte para hacer pocos documentos
             if (contArchivos > 12){
-                break;
+               break;
             }
 
             // vocabulario auxiliar usado para este doc, despues se pasa al vocabulario final

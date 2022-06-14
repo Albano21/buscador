@@ -4,10 +4,7 @@ import dlc.tpu.buscador.servicio.Indexador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 
@@ -30,7 +27,8 @@ public class indexadorController {
     }
 
     @PutMapping("/agregar/")
-    public ResponseEntity agregarNuevoDoc(@RequestParam(required = false) String path){
+    //public ResponseEntity agregarNuevoDoc(@RequestParam(required = false) String path)
+    public ResponseEntity agregarNuevoDoc(@RequestBody String path){
         try {
             indexador.indexarPorPath(path);
             return ResponseEntity.ok().build();

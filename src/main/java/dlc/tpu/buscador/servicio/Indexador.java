@@ -185,7 +185,9 @@ public class Indexador {
         //HashMap<Integer, Documento> documentosAGuardar = cargarDocumentos();
 
         // consigue el ultimo id y crea el objeto documento
-        int id = documentoRepository.getIdTopByOrderByIdDesc()+1;
+        Documento ultimoDoc = documentoRepository.getDistinctTopByOrderByIdDesc();
+        int id = ultimoDoc.getId()+1;
+        //documentoRepository.getIdTopByOrderByIdDesc()+1;
         Documento documento = new Documento(id, docFile.getName(), docFile.getPath());
 
         // vocabulario auxiliar

@@ -23,7 +23,7 @@ public class Indexador {
 
     private HashSet<String> stopWords = new HashSet<>();
 
-    private int tamañoCarga = 350000;
+    private int tamañoCarga = 250000;
 
     @Autowired
     private DocumentoXPalabraRepository documentoXPalabraRepo;
@@ -197,7 +197,8 @@ public class Indexador {
         Collection<Palabra> palabrasAPersistir = new ArrayList<>();
 
         // consigue el ultimo id de palabras y le suma 1
-        int contPalabra = palabraRepository.getIdTopByOrderByIdDesc()+1;
+        Palabra ultimaPalabra = palabraRepository.getDistinctTopByOrderByIdDesc();
+        int contPalabra = ultimaPalabra.getId()+1;
 
         //Conjunto de dxp a guardar
         ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();

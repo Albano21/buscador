@@ -101,15 +101,22 @@ public class Documento implements Comparable<Documento>{
     }
 
     //Metodo que carga la descripcion del doc
-    public void cargarDescripcion() throws FileNotFoundException {
-        Scanner scDoc = new Scanner(new File(path));
-        while(scDoc.hasNextLine()){
-            String linea = scDoc.nextLine();
-            if (linea.isEmpty()){
-                break;
+    public void cargarDescripcion() {
+        Scanner scDoc = null;
+        try {
+            scDoc = new Scanner(new File(path));
+            while(scDoc.hasNextLine()){
+                String linea = scDoc.nextLine();
+                if (linea.isEmpty()){
+                    break;
+                }
+                descripcion += linea + "\n";
             }
-            descripcion += linea + "\n";
+        } catch (FileNotFoundException e) {
+            descripcion = "Sin descripcion.";
         }
+
+
     }
 }
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import javax.print.Doc;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 @Service
@@ -183,6 +185,22 @@ public class Buscador {
 
     public Documento buscarPorId(int id){
         return documentoRepository.findById(id).get();
+    }
+
+    public ArrayList<Documento> buscarConDescripcion(String consulta) {
+        ArrayList<Documento>  listaDocumentosConsultaFinal = buscar(consulta);
+        for (Documento doc : listaDocumentosConsultaFinal){
+            doc.cargarDescripcion();
+        }
+        return listaDocumentosConsultaFinal;
+    }
+
+    public Collection<Documento> buscarTodosConDescripcion(){
+        Collection<Documento> todos = buscarTodosLosDocumentos();
+        for (Documento doc: todos){
+            doc.cargarDescripcion();
+        }
+        return todos;
     }
 
     private void formaViejaDeCargarPosteos(String consulta){

@@ -25,6 +25,10 @@ public class buscadorController {
         return buscador.buscar(consulta);
     }
 
+    @GetMapping("/descripcion/")
+    public Collection<Documento> buscarConDescripcion(@RequestParam(required = false) String consulta){
+        return buscador.buscarConDescripcion(consulta);
+    }
 
 
 /*
@@ -40,6 +44,11 @@ public class buscadorController {
         return buscador.buscarTodosLosDocumentos();
     }
 
+    @GetMapping("/todos")
+    public Collection<Documento> mostrarTodosConDescripcion(){
+        return buscador.buscarTodosConDescripcion();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Documento> buscarDocPorId(@PathVariable int id){
         if (buscador.buscarPorId(id) != null) {
@@ -49,6 +58,7 @@ public class buscadorController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
 
 
 

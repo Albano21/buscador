@@ -181,6 +181,10 @@ public class Buscador {
         return documentos.values();
     }
 
+    public Documento buscarPorId(int id){
+        return documentoRepository.findById(id).get();
+    }
+
     private void formaViejaDeCargarPosteos(String consulta){
         // hacer los posteos directamente desde la string consulta, saca la tablaConsulta
 

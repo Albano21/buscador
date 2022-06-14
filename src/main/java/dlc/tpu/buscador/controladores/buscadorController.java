@@ -4,6 +4,7 @@ package dlc.tpu.buscador.controladores;
 import dlc.tpu.buscador.clases.Documento;
 import dlc.tpu.buscador.servicio.Buscador;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,15 @@ public class buscadorController {
         return buscador.buscarTodosLosDocumentos();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Documento> buscarDocPorId(@PathVariable int id){
+        if (buscador.buscarPorId(id) != null) {
+            return ResponseEntity.ok(buscador.buscarPorId(id));
+        }
+        else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 

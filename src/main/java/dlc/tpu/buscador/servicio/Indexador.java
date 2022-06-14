@@ -4,6 +4,7 @@ import dlc.tpu.buscador.clases.*;
 import dlc.tpu.buscador.repositorio.DocumentoRepository;
 import dlc.tpu.buscador.repositorio.DocumentoXPalabraRepository;
 import dlc.tpu.buscador.repositorio.PalabraRepository;
+import org.apache.tomcat.jni.Directory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -22,7 +23,7 @@ public class Indexador {
 
     private HashSet<String> stopWords = new HashSet<>();
 
-    private int tamañoCarga = 250000;
+    private int tamañoCarga = 350000;
 
     @Autowired
     private DocumentoXPalabraRepository documentoXPalabraRepo;
@@ -165,8 +166,23 @@ public class Indexador {
 
     }
 
+    public void indexarPorPath(String path) throws FileNotFoundException {
+
+        File docFile = new File(path);
+        indexarNuevoDoc(docFile);
+
+    }
+
+
+    // Metodo para agregar un DOC
     //HAY QUE TRAER LA HASHTABLE DE PALABRAS DESDE LA BASE DE DATOS y hacer tabla dxps
-    /*public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
+    public void indexarNuevoDoc(File docFile) throws FileNotFoundException {
+
+        // Vocabulario final
+        HashMap<String, Palabra> vocabularioFinal = cargarVocabularioFinal();
+
+        //Conjunto de documentos a guardar al final del proceso
+        //HashMap<Integer, Documento> documentosAGuardar = cargarDocumentos();
 
         // consigue el ultimo id y crea el objeto documento
         int id = documentoRepository.getIdTopByOrderByIdDesc()+1;
@@ -174,11 +190,15 @@ public class Indexador {
 
         // vocabulario auxiliar
         HashMap<String, Contador> vocabularioAux = new HashMap<>();
+
         // lista de palabras nuevas a persistir y de palabras actualizar
         Collection<Palabra> palabrasAPersistir = new ArrayList<>();
+
         // consigue el ultimo id de palabras y le suma 1
-        int contPalabra = palabraRepository.getIdTopByOrderByIdDesc();
-        contPalabra++;
+        int contPalabra = palabraRepository.getIdTopByOrderByIdDesc()+1;
+
+        //Conjunto de dxp a guardar
+        ArrayList<DocumentoXPalabra> dxpACargar = new ArrayList<>();
 
         // crea el scanner para el doc
         Scanner docScan = new Scanner(docFile);
@@ -248,7 +268,7 @@ public class Indexador {
 
     }
 
-    */
+
     private void cargarStopWords() throws FileNotFoundException {
         File fileEnglish = new File("StopsWords.txt");
         Scanner scStopWords = new Scanner(fileEnglish);
@@ -274,6 +294,22 @@ public class Indexador {
 
         return palabra;
 
+    }
+
+    private HashMap<String, Palabra> cargarVocabularioFinal(){
+        HashMap<String, Palabra> vocabularioFinal = new HashMap<>();
+        for(Palabra p : palabraRepository.findAll()) {
+            vocabularioFinal.put(p.getPalabra(), p);
+        }
+        return vocabularioFinal;
+    }
+
+    private HashMap<Integer, Documento> cargarDocumentos(){
+        HashMap<Integer, Documento> documentos = new HashMap<>();
+        for (Documento doc : documentoRepository.findAll()){
+            documentos.put(doc.getId(), doc);
+        }
+        return documentos;
     }
 
 

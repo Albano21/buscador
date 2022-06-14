@@ -18,13 +18,31 @@
     width: 100%;
     margin: 0 auto;
     padding: 40px 20px;
-
 }
 
-h1,h2,h4 {
+h1{
     margin: 15px auto;
     text-align: center;
+    font-style: normal;
+    letter-spacing: normal;
+    text-transform: uppercase;
 }
+
+h2,h4{
+    text-align: center;
+}
+h5{
+    text-align: center;
+    animation: move 4s linear infinite;
+    background-image: linear-gradient(to right, #77f, #33d0ff, #f4591f, #f338f9, #77f);
+    background-size: 200% auto;
+    font: 700 70px/1 Helvetica;
+    letter-spacing: 1px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes move { to { background-position: 200% center; } }
+
 
 /*FOOTER*/
 
@@ -105,14 +123,13 @@ input {
 .grid {
     inline-size: 90%;
     max-inline-size: 24em;
-    margin: 4rem auto;
+    margin: 5rem auto;
     width: 100%;
     align-items: center;
 
 }
 
 .search {
-
 }
 
 .search__field {

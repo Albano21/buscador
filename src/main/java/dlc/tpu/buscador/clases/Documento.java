@@ -34,6 +34,7 @@ public class Documento implements Comparable<Documento>{
         this.id = id;
         this.name = name;
         this.path = path;
+        this.descripcion = "";
     }
 
     public int getId() {
@@ -120,7 +121,7 @@ public class Documento implements Comparable<Documento>{
                 if (linea.isEmpty()){
                     break;
                 }
-                descripcion += linea + "\n";
+                descripcion += linea + "\n ";
             }
         } catch (FileNotFoundException e) {
             descripcion = "Sin descripcion.";

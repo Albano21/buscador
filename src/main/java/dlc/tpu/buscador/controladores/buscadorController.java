@@ -44,7 +44,7 @@ public class buscadorController {
         return buscador.buscarTodosLosDocumentos();
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/todos/descripcion")
     public Collection<Documento> mostrarTodosConDescripcion(){
         return buscador.buscarTodosConDescripcion();
     }

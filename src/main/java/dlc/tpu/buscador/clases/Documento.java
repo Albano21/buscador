@@ -18,6 +18,8 @@ public class Documento implements Comparable<Documento>{
     @Basic
     private String path;
 
+
+
     @Transient
     private double ir;
 
@@ -64,6 +66,14 @@ public class Documento implements Comparable<Documento>{
 
     public void setIr(double ir) {
         this.ir = ir;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void sumarIr(double ir){

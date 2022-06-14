@@ -34,7 +34,7 @@ public class Documento implements Comparable<Documento>{
         this.id = id;
         this.name = name;
         this.path = path;
-        this.descripcion = "";
+        this.descripcion = " ";
     }
 
     public int getId() {
@@ -113,15 +113,18 @@ public class Documento implements Comparable<Documento>{
 
     //Metodo que carga la descripcion del doc
     public void cargarDescripcion() {
-        Scanner scDoc = null;
+       // Scanner scDoc = null;
+        descripcion = " ";
+
+
         try {
-            scDoc = new Scanner(new File(path));
+            Scanner scDoc = new Scanner(new File(path));
             while(scDoc.hasNextLine()){
                 String linea = scDoc.nextLine();
                 if (linea.isEmpty()){
                     break;
                 }
-                descripcion += linea + "\n ";
+                descripcion += linea ;
             }
         } catch (FileNotFoundException e) {
             descripcion = "Sin descripcion.";

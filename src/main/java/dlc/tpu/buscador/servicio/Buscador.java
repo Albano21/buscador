@@ -34,6 +34,10 @@ public class Buscador {
         // buscador, hay que ponerlos como atributos de la clase y usarlos para busquedas dentro de la misma sesion
 
         //-------------------------------ENTRADAS--------------------------------
+
+        consulta = consulta.toLowerCase();
+        consulta = limpiezaTotal(consulta);
+
         //El conjunto D con N documentos di.
         if (documentos.isEmpty()){
             documentos = cargarDocumentos();
@@ -233,6 +237,19 @@ public class Buscador {
             //agrego el objeto posteosXPalabra a la lista de la consulta
             listasDePosteoConsulta.add(posteosXPalabra);
         }
+    }
+
+    private String limpiezaTotal(String palabra) {
+        // hacer minusculas las palabras
+        palabra = palabra.toLowerCase();
+
+        //limpiar palabra
+        palabra = palabra.replaceAll("[0123456789,;.:!´{}()\"<>*_#$%&@/=?¡-]", "");
+        palabra = palabra.replace("[", "");
+        palabra = palabra.replace("]", "");
+
+        return palabra;
+
     }
 
 

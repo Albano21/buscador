@@ -139,19 +139,19 @@ public class Indexador {
             }
 
             if (dxpACargar.size() >= tamañoCarga){
-                documentoXPalabraRepo.saveAll(dxpACargar);
+               // documentoXPalabraRepo.saveAll(dxpACargar);
                 dxpACargar.clear();
             }
         }
 
         // se asegura que no queden documentosXPalabra a cargar en la lista y si quedan los carga
         if (!dxpACargar.isEmpty()){
-            documentoXPalabraRepo.saveAll(dxpACargar);
+           // documentoXPalabraRepo.saveAll(dxpACargar);
             dxpACargar.clear();
         }
 
         // manda a guardar todos los documentos juntos
-        documentoRepository.saveAll(documentosAGuardar.values());
+       // documentoRepository.saveAll(documentosAGuardar.values());
 
         // manda a guardar todas las palabras juntas
         palabraRepository.saveAll(vocabularioFinal.values());
